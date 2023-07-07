@@ -19,6 +19,7 @@ package com.antwerkz.maven;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Files;
@@ -43,11 +44,9 @@ public class ObsoleterMojo extends AbstractMojo {
 
     public void execute() {
         try {
-            Files.walk(outputDirectory.toPath())
-                .filter(p -> p.endsWith(".class"))
-                .forEach(p -> new Obsoleter(p.toFile()));
+            Obsoleter.rewriteAllFiles(outputDirectory.toPath());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 }
