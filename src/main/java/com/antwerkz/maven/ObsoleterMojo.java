@@ -32,7 +32,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * Goal which touches a timestamp file.
+ * Goal which process the @Obsolete annotation
  */
 @Mojo(name = "obsolete", defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
 public class ObsoleterMojo extends AbstractMojo {

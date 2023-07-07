@@ -13,5 +13,5 @@ public @interface Obsolete {
      *
      * @return the target version
      */
-    String value();
+    String value() default "";
 }
