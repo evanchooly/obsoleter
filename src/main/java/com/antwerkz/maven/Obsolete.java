@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Obsolete {
     /**
-     * The target version that will ultimately hide the annotated methods
+     * The version in which the annotated element was obsoleted.
      *
-     * @return the target version
+     * @return the obsolete version
      */
-    String value() default "";
+    String value();
 }

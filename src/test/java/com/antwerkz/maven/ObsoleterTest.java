@@ -26,16 +26,18 @@ public class ObsoleterTest {
      */
     @Test
     public void shouldHideMethod() throws IOException, ReflectiveOperationException {
-        check(false);
+        check(false, "dummy", "yo!");
+        check(false, "forever", "forever");
         Obsoleter.rewriteAllFiles(root);
-        check(true);
+        check(true, "dummy", "yo!");
+        check(false, "forever", "forever");
     }
 
-    private void check(boolean synthetic) throws MalformedURLException, ReflectiveOperationException {
+    private void check(boolean synthetic, String methodName, String returnValue) throws MalformedURLException, ReflectiveOperationException {
         Class<?> klass = loadClass();
-        Method method = klass.getMethod("dummy");
+        Method method = klass.getMethod(methodName);
         assertEquals(method.isSynthetic(), synthetic);
-        assertEquals("yo!", method.invoke(klass.newInstance()));
+        assertEquals(returnValue, method.invoke(klass.newInstance()));
     }
 
     private Class<?> loadClass() throws MalformedURLException, ClassNotFoundException {
