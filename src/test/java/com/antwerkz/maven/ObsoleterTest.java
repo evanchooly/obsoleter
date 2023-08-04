@@ -1,7 +1,5 @@
 package com.antwerkz.maven;
 
-import org.testng.annotations.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -10,9 +8,9 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 
+import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 public class ObsoleterTest {
     Path root;
@@ -33,7 +31,8 @@ public class ObsoleterTest {
         check(false, "forever", "forever");
     }
 
-    private void check(boolean synthetic, String methodName, String returnValue) throws MalformedURLException, ReflectiveOperationException {
+    private void check(boolean synthetic, String methodName, String returnValue)
+            throws MalformedURLException, ReflectiveOperationException {
         Class<?> klass = loadClass();
         Method method = klass.getMethod(methodName);
         assertEquals(method.isSynthetic(), synthetic);
@@ -41,7 +40,7 @@ public class ObsoleterTest {
     }
 
     private Class<?> loadClass() throws MalformedURLException, ClassNotFoundException {
-        URLClassLoader loader = new URLClassLoader(new URL[] {root.toUri().toURL()}, null);
+        URLClassLoader loader = new URLClassLoader(new URL[] { root.toUri().toURL() }, null);
         Class<?> klass = loader.loadClass(ObsoletedMethods.class.getName());
         return klass;
     }

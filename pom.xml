@@ -4,9 +4,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>com.antwerkz</groupId>
+    <artifactId>antwerkz-parent</artifactId>
+    <version>6</version>
+  </parent>
+
   <groupId>com.antwerkz.maven</groupId>
   <artifactId>obsoleter</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>obsoleter</name>
@@ -95,4 +101,89 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>jreleaser</id>
+      <activation>
+        <property>
+          <name>release</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jreleaser</groupId>
+            <artifactId>jreleaser-maven-plugin</artifactId>
+            <version>1.7.0</version>
+            <configuration>
+              <jreleaser>
+                <signing>
+                  <active>ALWAYS</active>
+                  <armored>true</armored>
+                </signing>
+                <deploy>
+                  <maven>
+                    <nexus2>
+                      <maven-central>
+                        <active>ALWAYS</active>
+                        <url>https://s01.oss.sonatype.org/service/local</url>
+                        <snapshotUrl>https://s01.oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
+                        <closeRepository>true</closeRepository>
+                        <releaseRepository>false</releaseRepository>
+                        <stagingRepositories>target/staging-deploy</stagingRepositories>
+                      </maven-central>
+                    </nexus2>
+                  </maven>
+                </deploy>
+                  <release>
+                    <github>
+                      <changelog>
+                        <links>true</links>
+                        <formatted>ALWAYS</formatted>
+                        <preset>gitmoji</preset>
+                        <contributorsTitleFormat>### Contributors'</contributorsTitleFormat>
+                        <append>
+                          <enabled>true</enabled>
+                        </append>
+                        <contributors>
+                          <format>- {{contributorName}} ({{contributorUsernameAsLink}})</format>
+                        </contributors>
+
+                        <hide>
+                          <uncategorized>true</uncategorized>
+                          <contributors>
+                            <contributor>[bot]</contributor>
+                          </contributors>
+                        </hide>
+
+                        <includeLabels>
+                          <includeLabel>issue</includeLabel>
+                        </includeLabels>
+
+                        <categories>
+                          <category>
+                            <title>🚀 Features</title>
+                            <key>features</key>
+                            <labels>feature,enhancement</labels>
+                            <order>1</order>
+                          </category>
+                          <category>
+                            <title>🐛 Bug Fixes</title>
+                            <key>fixes</key>
+                            <format>- {{commitShortHash}} {{commitBody}}</format>
+                            <labels>bug,fix</labels>
+                            <order>2</order>
+                          </category>
+                        </categories>
+                      </changelog>
+                    </github>
+                  </release>
+              </jreleaser>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -1,5 +1,9 @@
 package com.antwerkz.maven;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -7,11 +11,6 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.MethodNode;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Iterator;
 
 import static org.objectweb.asm.Opcodes.ACC_SYNTHETIC;
 import static org.objectweb.asm.Opcodes.ASM9;
@@ -30,9 +29,9 @@ public final class Obsoleter {
             public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
                 var classVisitor = this;
 
-//                var methodVisitor = super.visitMethod(access, name, descriptor, signature, exceptions);
+                //                var methodVisitor = super.visitMethod(access, name, descriptor, signature, exceptions);
                 var node = new MethodNode(ASM9, access, name, descriptor, signature, exceptions);
-                return new ObsoleteMethodVisitor( node, classVisitor);
+                return new ObsoleteMethodVisitor(node, classVisitor);
             }
         }, 0);
         Files.write(classFile, writer.toByteArray());
