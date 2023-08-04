@@ -48,3 +48,9 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: collect logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: "jreleaser-trace.log"
+          path: target/jreleaser/trace.log
