@@ -15,7 +15,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ inputs.java }}
+          java-version: 11
           distribution: 'temurin'
           server-id: central
           server-username: MAVEN_USERNAME
