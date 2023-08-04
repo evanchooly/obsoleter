@@ -21,9 +21,9 @@ jobs:
           path: |
             ~/.m2
             **/target
-          key: build-${{ github.repository }}-${{ env.GITHUB_REF_NAME }}
+          key: build-${{ env.GITHUB_REF_NAME }}
           restore-keys: |
-            build-${{ github.repository }}-${{ env.GITHUB_REF_NAME }}
+            build-${{ env.GITHUB_REF_NAME }}
 
       - name: Setup Java
         uses: actions/setup-java@v3
@@ -39,7 +39,9 @@ jobs:
       - name: Publish
         run: mvn -Drelease jreleaser:full-release
         env:
-          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
-          GITHUB_OAUTH: ${{ secrets.GH_TOKEN }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
+          JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
+          JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}
+          JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
+          JRELEASER_NEXUS2_PASSWORD: ${{ secrets.JRELEASER_NEXUS2_PASSWORD }}
+          JRELEASER_NEXUS2_USERNAME: ${{ secrets.JRELEASER_NEXUS2_USERNAME }}
