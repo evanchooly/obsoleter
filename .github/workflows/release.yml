@@ -37,7 +37,7 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Publish
-        run: mvn -Plocal-deploy -Drelease deploy jreleaser:full-release
+        run: mvn -e -Plocal-deploy -Drelease deploy jreleaser:full-release
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
           JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
