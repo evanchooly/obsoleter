@@ -137,7 +137,7 @@
                         <snapshotUrl>https://s01.oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
                         <closeRepository>true</closeRepository>
                         <releaseRepository>false</releaseRepository>
-                        <stagingRepositories>target/staging-deploy</stagingRepositories>
+                        <stagingRepositories>target/localRepo/snapshot</stagingRepositories>
                       </maven-central>
                     </nexus2>
                   </maven>
