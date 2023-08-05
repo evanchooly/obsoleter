@@ -36,7 +36,7 @@ public class ObsoleterTest {
         Class<?> klass = loadClass();
         Method method = klass.getMethod(methodName);
         assertEquals(method.isSynthetic(), synthetic);
-        assertEquals(returnValue, method.invoke(klass.newInstance()));
+        assertEquals(returnValue, method.invoke(klass.getConstructor().newInstance()));
     }
 
     private Class<?> loadClass() throws MalformedURLException, ClassNotFoundException {
