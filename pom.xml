@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.antwerkz</groupId>
     <artifactId>antwerkz-parent</artifactId>
-    <version>6</version>
+    <version>jreleaser-7-SNAPSHOT</version>
   </parent>
 
   <groupId>com.antwerkz.maven</groupId>
@@ -16,9 +16,9 @@
   <packaging>maven-plugin</packaging>
 
   <name>obsoleter</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://github.com/evanchooly/obsoleter</url>
   <description>Hides obsolete methods from javac</description>
+
   <licenses>
     <license>
       <name>Apache-2.0</name>
@@ -79,40 +79,49 @@
         </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
         <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
@@ -121,87 +130,5 @@
   </build>
 
   <profiles>
-    <profile>
-      <id>jreleaser</id>
-      <activation>
-        <property>
-          <name>release</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jreleaser</groupId>
-            <artifactId>jreleaser-maven-plugin</artifactId>
-            <version>1.7.0</version>
-            <configuration>
-              <jreleaser>
-                <signing>
-                  <active>ALWAYS</active>
-                  <armored>true</armored>
-                </signing>
-                <deploy>
-                  <maven>
-                    <nexus2>
-                      <maven-central>
-                        <active>ALWAYS</active>
-                        <url>https://oss.sonatype.org/service/local</url>
-                        <snapshotUrl>https://oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
-                        <closeRepository>true</closeRepository>
-                        <releaseRepository>false</releaseRepository>
-                        <stagingRepositories>target/localRepo/snapshot</stagingRepositories>
-                      </maven-central>
-                    </nexus2>
-                  </maven>
-                </deploy>
-                  <release>
-                    <github>
-                      <changelog>
-                        <links>true</links>
-                        <formatted>ALWAYS</formatted>
-                        <preset>gitmoji</preset>
-                        <contributorsTitleFormat>### Contributors'</contributorsTitleFormat>
-                        <append>
-                          <enabled>true</enabled>
-                        </append>
-                        <contributors>
-                          <format>- {{contributorName}} ({{contributorUsernameAsLink}})</format>
-                        </contributors>
-
-                        <hide>
-                          <uncategorized>true</uncategorized>
-                          <contributors>
-                            <contributor>[bot]</contributor>
-                          </contributors>
-                        </hide>
-
-                        <includeLabels>
-                          <includeLabel>issue</includeLabel>
-                        </includeLabels>
-
-                        <categories>
-                          <category>
-                            <title>🚀 Features</title>
-                            <key>features</key>
-                            <labels>feature,enhancement</labels>
-                            <order>1</order>
-                          </category>
-                          <category>
-                            <title>🐛 Bug Fixes</title>
-                            <key>fixes</key>
-                            <format>- {{commitShortHash}} {{commitBody}}</format>
-                            <labels>bug,fix</labels>
-                            <order>2</order>
-                          </category>
-                        </categories>
-                      </changelog>
-                    </github>
-                  </release>
-              </jreleaser>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 </project>
