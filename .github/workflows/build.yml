@@ -19,6 +19,8 @@ jobs:
     needs:
       - Build
     uses: evanchooly/workflows/.github/workflows/release.yml@master
+    with:
+      java: 17
     secrets:
       BLUESKY_PASSWORD: ${{secrets.BLUESKY_PASSWORD }}
       BLUESKY_USERNAME: ${{secrets.BLUESKY_USERNAME }}
