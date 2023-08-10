@@ -33,7 +33,6 @@
   </developers>
 
   <properties>
-    <jreleaser.nexus.deploy>NEVER</jreleaser.nexus.deploy>
     <jreleaser.announce>NEVER</jreleaser.announce>
     <jreleaser.releaseRepository>false</jreleaser.releaseRepository>
 
