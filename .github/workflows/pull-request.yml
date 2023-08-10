@@ -7,4 +7,4 @@ on:
 
 jobs:
   dependabot:
-    uses: evanchooly/workflows/.github/workflows/pull-request.yml@jreleaser
+    uses: evanchooly/workflows/.github/workflows/pull-request.yml@master

@@ -10,7 +10,7 @@ on:
 
 jobs:
   Build:
-    uses: evanchooly/workflows/.github/workflows/build.yml@jreleaser
+    uses: evanchooly/workflows/.github/workflows/build.yml@master
     with:
       java: 17
 
@@ -18,7 +18,7 @@ jobs:
     if: github.ref_type == 'branch'
     needs:
       - Build
-    uses: evanchooly/workflows/.github/workflows/release.yml@jreleaser
+    uses: evanchooly/workflows/.github/workflows/release.yml@master
     secrets:
       JRELEASER_NEXUS2_USERNAME: ${{ secrets.JRELEASER_NEXUS2_USERNAME }}
       JRELEASER_NEXUS2_PASSWORD: ${{ secrets.JRELEASER_NEXUS2_PASSWORD }}
