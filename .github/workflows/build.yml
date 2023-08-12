@@ -4,8 +4,6 @@ on:
   push:
     branches-ignore:
       - 'dependabot/**'
-    tags-ignore:
-      - r[0-9]*
   workflow_dispatch:
 
 jobs:
@@ -14,7 +12,7 @@ jobs:
     with:
       java: 17
 
-  Snapshots:
+  Release:
     if: github.ref_type == 'branch'
     needs:
       - Build
