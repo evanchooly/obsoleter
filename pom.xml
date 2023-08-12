@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.antwerkz</groupId>
     <artifactId>antwerkz-parent</artifactId>
-    <version>9.0.0</version>
+    <version>14</version>
   </parent>
 
   <groupId>com.antwerkz.maven</groupId>
@@ -39,6 +39,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
   </properties>
 
   <dependencies>
