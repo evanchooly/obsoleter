@@ -14,6 +14,12 @@ jobs:
     with:
       java: 17
 
+  What:
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run:  echo github.ref_type = ${{ github.ref_type }}
+
   Release:
     if: github.ref_type == 'branch'
     needs:
