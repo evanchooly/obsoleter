@@ -15,7 +15,7 @@ jobs:
       java: 17
 
   Release:
-    if: github.ref_type == 'branch' or github.ref_type == 'tag'
+    if: github.ref_type == 'branch' || github.ref_type == 'tag'
     needs:
       - Build
     uses: evanchooly/workflows/.github/workflows/release.yml@master
